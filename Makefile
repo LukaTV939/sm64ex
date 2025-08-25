@@ -738,13 +738,13 @@ BASEPACK_PATH := $(BUILD_DIR)/$(BASEDIR)/$(BASEPACK)
 BASEPACK_LST := $(BUILD_DIR)/basepack.lst
 
 # depend on resources as well
-all: $(BASEPACK_PATH)
+#all: $(BASEPACK_PATH)
 
 # phony target for building resources
 res: $(BASEPACK_PATH)
 
 # prepares the basepack.lst
-$(BASEPACK_LST): $(EXE)
+$(BASEPACK_LST): $(SOUND_BIN_DIR)/bank_sets $(SOUND_BIN_DIR)/sound_data.ctl $(SOUND_BIN_DIR)/sound_data.tbl $(SOUND_BIN_DIR)/sequences.bin
 	@mkdir -p $(BUILD_DIR)/$(BASEDIR)
 	@touch $(BASEPACK_LST)
 	@echo "$(BUILD_DIR)/sound/bank_sets sound/bank_sets" > $(BASEPACK_LST)
@@ -965,7 +965,7 @@ $(BUILD_DIR)/assets/mario_anim_data.c: $(wildcard assets/anims/*.inc.c)
 	$(PYTHON) tools/mario_anims_converter.py > $@
 
 $(BUILD_DIR)/assets/demo_data.c: assets/demo_data.json $(wildcard assets/demos/*.bin)
-	$(PYTHON) tools/demo_data_converter.py assets/demo_data.json $(VERSION_CFLAGS) > $@
+	$(PYTHON) tools/demo_data_converter.py assets/demo_data.json assets.json $(VERSION_CFLAGS) > $@
 
 # Source code
 $(BUILD_DIR)/levels/%/leveldata.o: OPT_FLAGS := -g
