@@ -54,11 +54,8 @@ static void (*kb_all_keys_up)(void) = NULL;
 // whether to use timer for frame control
 static bool use_timer = true;
 // time between consequtive game frames, in perf counter ticks
-static double frame_rate = 0.0; // set in init()
-// time in which a frame began, in perf counter ticks
-static double frame_time = 0.0; // updated in start_frame()
-// GetPerformanceFrequency
-static double perf_freq = 0.0;
+static const int frame_time_60FPS = 1000 / (2 * FRAMERATE);
+static const int frame_time_30FPS = 1000 / FRAMERATE;
 
 const SDL_Scancode windows_scancode_table[] = {
   /*  0                        1                            2                         3                            4                     5                            6                            7  */
