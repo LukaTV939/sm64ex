@@ -33,6 +33,9 @@ OSX_BUILD ?= 0
 # Enable -no-pie linker option
 NO_PIE ?= 1
 
+# Use OpenGL ES instead of OpenGL
+USE_GLES ?= 0
+
 # Specify the target you are building for, TARGET_BITS=0 means native
 TARGET_ARCH ?= native
 TARGET_BITS ?= 0
@@ -215,6 +218,8 @@ GRUCODE_ASFLAGS := $(GRUCODE_ASFLAGS) --defsym $(GRUCODE_DEF)=1
 VERSION_CFLAGS := $(VERSION_CFLAGS) -DNON_MATCHING -DAVOID_UB
 
 ifeq ($(TARGET_RPI),1) # Define RPi to change SDL2 title & GLES2 hints
+      VERSION_CFLAGS += -DUSE_GLES
+else ifeq ($(USE_GLES),1)
       VERSION_CFLAGS += -DUSE_GLES
 endif
 
@@ -538,6 +543,8 @@ else ifeq ($(findstring SDL,$(WINDOW_API)),SDL)
     BACKEND_LDFLAGS += -lGLESv2
   else ifeq ($(OSX_BUILD),1)
     BACKEND_LDFLAGS += -framework OpenGL $(shell pkg-config --libs glew)
+  else ifeq ($(USE_GLES),1)
+    BACKEND_LDFLAGS += -lGLESv2
   else
     BACKEND_LDFLAGS += -lGL
   endif
