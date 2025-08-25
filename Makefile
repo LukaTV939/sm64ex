@@ -440,7 +440,7 @@ RPC_LIBS :=
 ifeq ($(DISCORDRPC),1)
   ifeq ($(WINDOWS_BUILD),1)
     RPC_LIBS := lib/discord/libdiscord-rpc.dll
-  else ifeq ($(OSX_BUILD),1) 
+  else ifeq ($(OSX_BUILD),1)
     # needs testing
     RPC_LIBS := lib/discord/libdiscord-rpc.dylib
   else
@@ -453,6 +453,15 @@ DEP_FILES := $(O_FILES:.o=.d) $(ULTRA_O_FILES:.o=.d) $(GODDARD_O_FILES:.o=.d) $(
 
 # Segment elf files
 SEG_FILES := $(SEGMENT_ELF_FILES) $(ACTOR_ELF_FILES) $(LEVEL_ELF_FILES)
+
+# Copy the demo files
+DEMO_IN_RES_DIR := ./assets/demos
+DEMO_OUT_RES_DIR := $(BUILD_DIR)/$(BASEDIR)/demos
+DEMO_COPY_RES := \
+    mkdir -p $(DEMO_OUT_RES_DIR); \
+    cp $(DEMO_IN_RES_DIR)/* $(DEMO_OUT_RES_DIR);
+
+DEMO_BUILD_RES := $(shell $(call DEMO_COPY_RES))
 
 ##################### Compiler Options #######################
 INCLUDE_CFLAGS := -I include -I $(BUILD_DIR) -I $(BUILD_DIR)/include -I src -I .

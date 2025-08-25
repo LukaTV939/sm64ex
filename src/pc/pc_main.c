@@ -177,6 +177,7 @@ void main_func(void) {
     fs_init(sys_ropaths, gamedir, userpath);
 
     configfile_load(configfile_name());
+    demo_data_load();
 
     if (gCLIOpts.FullScreen == 1)
         configWindow.fullscreen = true;
@@ -225,7 +226,7 @@ void main_func(void) {
     wm_api->set_keyboard_callbacks(keyboard_on_key_down, keyboard_on_key_up, keyboard_on_all_keys_up);
 
     #if defined(AAPI_SDL1) || defined(AAPI_SDL2)
-    if (audio_api == NULL && audio_sdl.init()) 
+    if (audio_api == NULL && audio_sdl.init())
         audio_api = &audio_sdl;
     #endif
 
