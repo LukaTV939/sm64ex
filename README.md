@@ -1,6 +1,9 @@
 # sm64ex
 Fork of [sm64-port/sm64-port](https://github.com/sm64-port/sm64-port) with additional features. 
 
+Basically what I'm doing is copying every commit from [this branch](https://github.com/cdeletre/Render96ex/tree/tester_rt64alpha) by hand, and see if it that works becuase I would feel like a dumbass if I ask if this would work
+If you're here from portmaster discord hi :)
+
 Feel free to report bugs and contribute, but remember, there must be **no upload of any copyrighted asset**. 
 Run `./extract_assets.py --clean && make clean` or `make distclean` to remove ROM-originated content.
 
